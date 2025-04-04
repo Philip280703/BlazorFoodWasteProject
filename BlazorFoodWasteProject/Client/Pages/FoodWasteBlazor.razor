@@ -1,9 +1,20 @@
 ﻿@using BlazorFoodWasteProject.Shared.Models;
+@using BlazorFoodWasteProject.Client.Services.Interfaces;
+
+
 @page "/foodwasteblazor"
 <h3>FoodWasteBlazor</h3>
 
 @code {
 
-	
+	[Inject]
+	public IFoodWasteService FoodWasteService { get; set; }
+
+	private List<Root> FoodWasteList = new List<Root>();
+
+	protected override async Task OnInitializedAsync()
+	{
+		FoodWasteList = (await FoodWasteService.GetFoodWasteAsync()).ToList();
+	}
 
 }
