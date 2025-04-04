@@ -1,3 +1,5 @@
+using BlazorFoodWasteProject.Server.API;
+using BlazorFoodWasteProject.Shared.Models;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+// foodwaste api
+builder.Services.Configure<FoodWasteApiOptions>(
+	builder.Configuration.GetSection("FoodWasteAPI"));
+
+builder.Services.AddHttpClient<FoodWasteAPI>();
+
 
 var app = builder.Build();
 
